@@ -1,14 +1,6 @@
-import { environment } from '../environments/environment';
+import { configService } from '../services/config.service';
 
-const iframeBaseHref = `${environment.uiUrl}/`;
-
-const iframeStylesheets = [
-    `${environment.serviceUrl}/embed/bootstrap.min.css`
-];
-
-const iframeScripts = [
-    `${environment.serviceUrl}/embed/vendor-bundle.min.js`
-];
+const currentScript = document.currentScript;
 
 const createIframe = (element: any): Promise<HTMLIFrameElement> => {
     return new Promise((resolve) => {
@@ -25,9 +17,13 @@ const createIframe = (element: any): Promise<HTMLIFrameElement> => {
             iframeBody.style.fontFamily = 'font-family: \'Lato\', Calibri, Arial, sans-serif';
             iframeBody.style.margin = '5px';
 
-            loadBaseHref(iframeHead, iframeBaseHref);
-            loadStyles(iframeHead, iframeStylesheets);
-            loadScripts(iframeHead, iframeScripts).then(() => {
+            loadBaseHref(iframeHead, configService.getUiUrl());
+            loadStyles(iframeHead, [
+                `${getSelfBaseUrl()}/bootstrap.min.css`
+            ]);
+            loadScripts(iframeHead, [
+                `${getSelfBaseUrl()}/vendor-bundle.min.js`
+            ]).then(() => {
                 resolve(iframe);
             });
         };
@@ -111,7 +107,13 @@ const setLinkTargets = (document: any, target: string = '_blank') => {
     }
 };
 
+const getSelfBaseUrl = () => {
+    const src = currentScript.getAttribute('src');
+    return src.substring(0, src.lastIndexOf('/'));
+};
+
 export {
+    getSelfBaseUrl,
     createIframe,
     createSectionElement,
     createSubsectionElement,

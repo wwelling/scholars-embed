@@ -8,6 +8,7 @@
             true,
             256
         ],
+        "no-console": false,
         "ordered-imports": false,
         "quotemark": [
             true,

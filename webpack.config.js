@@ -27,7 +27,10 @@ module.exports = {
         uglifyOptions: {
           compress: false,
           ecma: 6,
-          mangle: true
+          mangle: true,
+          output: {
+            comments: false
+          }
         },
         sourceMap: true,
         include: /\.min\.js$/,

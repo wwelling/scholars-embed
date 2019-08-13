@@ -1,15 +1,9 @@
 import { getParsedTemplateFunction, pagination } from 'scholars-embed-utilities';
 
-import { environment } from './environments/environment';
-
 import { Embedded } from './model/embedded';
 
 import { setLinkTargets, createSectionElement, createSubsectionElement } from './utilities/document.utility';
-
-const additionalContext = {
-    vivoUrl: environment.vivoUrl,
-    serviceUrl: environment.serviceUrl
-};
+import { configService } from './services/config.service';
 
 export class EmbedRenderer {
 
@@ -21,7 +15,7 @@ export class EmbedRenderer {
 
     public render(section: any): Promise<void> {
         return new Promise((resolve, reject) => {
-            const sectionTemplateFunction = getParsedTemplateFunction(section.template, additionalContext);
+            const sectionTemplateFunction = getParsedTemplateFunction(section.template, this.getAdditionalContext());
             const sectionElement = createSectionElement();
             sectionElement.innerHTML = sectionTemplateFunction(this.embedded.individual);
             this.embedded.window.document.body.appendChild(sectionElement);
@@ -36,7 +30,7 @@ export class EmbedRenderer {
     public renderSubsection(subsection: any, pageNumber: number, pageSize: number): void {
         const embedTemplate = this.embedded.displayView.embedTemplates[this.embedded.embedView];
 
-        const subsectionTemplateFunction = getParsedTemplateFunction(embedTemplate, additionalContext);
+        const subsectionTemplateFunction = getParsedTemplateFunction(embedTemplate, this.getAdditionalContext());
 
         const identifier = `${this.embedded.collection}-${this.embedded.individual.id}-${btoa(this.embedded.displayView.name)}-${btoa(subsection.name)}`;
 
@@ -142,6 +136,13 @@ export class EmbedRenderer {
 
     private setPageSize(event: any, subsection: any): void {
         this.renderSubsection(subsection, 1, Number(event.target.value));
+    }
+
+    private getAdditionalContext(): any {
+        return {
+            vivoUrl: configService.getVivoUrl(),
+            serviceUrl: configService.getServiceUrl()
+        };
     }
 
 }
