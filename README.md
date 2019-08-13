@@ -4,7 +4,7 @@
 
 1. Build the image
 ```bash
-  docker build -t scholars-embed .
+  docker build -t scholars/embed .
 ```
 
 2. Deploy the container
@@ -16,7 +16,7 @@
   -e SERVICE_URL="http://localhost:9000" \
   -e UI_URL="http://localhost:4200" \
   -e VIVO_URL="http://scholars.library.tamu.edu/vivo"
-  scholars-embed
+  scholars/embed
 ```
 
 > Above environment variables passed into the container are defaults. URLs must be enclosed in double quotes. BASE_HREF must start and end with a forward slash.
