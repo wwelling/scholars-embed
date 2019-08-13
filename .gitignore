@@ -62,6 +62,8 @@ typings/
 
 package-lock.json
 
+dist/
+
 lib/
 
 node_modules/

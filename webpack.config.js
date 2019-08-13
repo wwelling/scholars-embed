@@ -17,7 +17,7 @@ module.exports = {
   devtool: 'source-map',
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, '../resources/static/embed')
+    path: path.resolve(__dirname, './dist')
   },
   optimization: {
     minimizer: [
