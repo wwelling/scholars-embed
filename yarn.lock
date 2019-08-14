@@ -2935,10 +2935,10 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-scholars-embed-utilities@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/scholars-embed-utilities/-/scholars-embed-utilities-0.1.0.tgz#7c2033abc326457e9aafb462ed55e8474ef90f2f"
-  integrity sha512-A0GdiQYO50XXhU0hlUy/B1bWsnEUYvHlsAFKDKOqcXzVHZc3/+Chu/zzqA0DA/W1xASzwBK+ZjgNP0AFvMl7qA==
+scholars-embed-utilities@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/scholars-embed-utilities/-/scholars-embed-utilities-0.1.1.tgz#2ba34376b012450861b66a29eea6d0a90d28a918"
+  integrity sha512-s+fxGkVAtXJMXt6WDLYdzeojve9ffPMQY5hXrbDMpiZdpCPPaAMOMOquvfHAGi1PfH9eERxXXSr9/wILrYOxcA==
   dependencies:
     handlebars "4.1.2"
     handlebars-loader "1.7.1"
