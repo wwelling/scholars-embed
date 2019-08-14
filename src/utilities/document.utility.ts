@@ -41,7 +41,7 @@ const createIframe = (element: any): Promise<HTMLIFrameElement> => {
 const loadBaseHref = (head: HTMLHeadElement, url: string): Promise<void> => {
     return new Promise((resolve) => {
         const tag = document.createElement('base');
-        tag.href = url;
+        tag.href = url.endsWith('/') ? url : `${url}/`;
         tag.onload = () => resolve();
         head.appendChild(tag);
     });
