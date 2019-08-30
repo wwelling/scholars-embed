@@ -50,7 +50,7 @@ export class EmbedSection {
     private getDataAttribute(dataset: any, name: string): string {
         const data = dataset[name];
         if (data === undefined) {
-            throw Error(`${name} is required`);
+            console.error(`${name} is required`);
         }
         return data;
     }
@@ -71,7 +71,7 @@ export class EmbedSection {
                 }
             }
         }
-        throw Error(`No section with name ${name}`);
+        console.error(`No section with name ${name}`);
     }
 
     private fetchLazyReferences(section: any, individual: any): Promise<void> {

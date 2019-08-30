@@ -17,26 +17,30 @@ export class EmbedRenderer {
         return new Promise((resolve, reject) => {
             const sectionTemplateFunction = getParsedTemplateFunction(section.template, this.getAdditionalContext());
             const sectionElement = createSectionElement();
-            sectionElement.innerHTML = sectionTemplateFunction(this.embedded.individual);
+            if (section.paginated) {
+                this.renderSection(section, 1, section.pageSize);
+            } else {
+                sectionElement.innerHTML = sectionTemplateFunction(this.embedded.individual);
+            }
             this.embedded.window.document.body.appendChild(sectionElement);
             setLinkTargets(this.embedded.window.document);
             for (const subsection of section.subsections) {
-                this.renderSubsection(subsection, 1, subsection.pageSize);
+                this.renderSection(subsection, 1, subsection.pageSize);
             }
             resolve();
         });
     }
 
-    public renderSubsection(subsection: any, pageNumber: number, pageSize: number): void {
+    private renderSection(section: any, pageNumber: number, pageSize: number): void {
         const embedTemplate = this.embedded.displayView.embedTemplates[this.embedded.embedView];
 
-        const subsectionTemplateFunction = getParsedTemplateFunction(embedTemplate, this.getAdditionalContext());
+        const sectionTemplateFunction = getParsedTemplateFunction(embedTemplate, this.getAdditionalContext());
 
-        const identifier = `${this.embedded.collection}-${this.embedded.individual.id}-${btoa(this.embedded.displayView.name)}-${btoa(subsection.name)}`;
+        const identifier = `${this.embedded.collection}-${this.embedded.individual.id}-${btoa(this.embedded.displayView.name)}-${btoa(section.name)}`;
 
-        const subsectionHTML = this.processSubsection(identifier, subsection, subsectionTemplateFunction, pageNumber, pageSize);
+        const sectionHTML = this.processSection(identifier, section, sectionTemplateFunction, pageNumber, pageSize);
 
-        if (subsectionHTML) {
+        if (sectionHTML) {
             let subsectionElement = this.embedded.window.document.getElementById(identifier);
             if (!subsectionElement) {
                 subsectionElement = createSubsectionElement();
@@ -44,13 +48,20 @@ export class EmbedRenderer {
                 this.embedded.window.document.body.appendChild(subsectionElement);
             }
 
-            subsectionElement.innerHTML = subsectionHTML;
+            subsectionElement.innerHTML = sectionHTML;
+
+            if (section.paginated) {
+                const headers = this.embedded.window.document.getElementsByClassName(`header-${identifier}`);
+                for (const header of headers) {
+                    header.style.display = 'none';
+                }
+            }
 
             const pageSizeControls = this.embedded.window.document.getElementsByClassName(`page-size-${identifier}`);
             if (pageSizeControls.length) {
                 const pageSizeButtons = pageSizeControls[0].querySelectorAll('button');
                 for (const pageSizeButton of pageSizeButtons) {
-                    pageSizeButton.addEventListener('click', (event) => this.setPageSize(event, subsection));
+                    pageSizeButton.addEventListener('click', (event) => this.setPageSize(event, section));
                 }
             }
 
@@ -59,7 +70,7 @@ export class EmbedRenderer {
                 for (const pageItem of pageItems) {
                     const pageLinks = pageItem.querySelectorAll('a');
                     for (const pageLink of pageLinks) {
-                        pageLink.addEventListener('click', (event) => this.gotoPage(event, subsection));
+                        pageLink.addEventListener('click', (event) => this.gotoPage(event, section));
                     }
                 }
             }
@@ -76,10 +87,10 @@ export class EmbedRenderer {
         }
     }
 
-    private processSubsection(identifier: string, subsection: any, subsectionTemplateFunction: (context: any) => string, pageNumber: number, pageSize: number): string {
+    private processSection(identifier: string, section: any, sectionTemplateFunction: (context: any) => string, pageNumber: number, pageSize: number): string {
         // filter
-        let resources = this.embedded.individual[subsection.field].filter((r) => {
-            for (const f of subsection.filters) {
+        let resources = this.embedded.individual[section.field].filter((r) => {
+            for (const f of section.filters) {
                 if ((Array.isArray(r[f.field]) ? r[f.field].indexOf(f.value) < 0 : r[f.field] !== f.value)) {
                     return false;
                 }
@@ -93,7 +104,7 @@ export class EmbedRenderer {
 
         // sort
         resources = [].concat(resources);
-        for (const s of subsection.sort) {
+        for (const s of section.sort) {
             const asc = s.direction.toUpperCase().trim() === 'ASC';
             resources = resources.sort((a, b) => {
                 const av = s.date ? new Date(a[s.field]) : a[s.field];
@@ -118,24 +129,24 @@ export class EmbedRenderer {
             height: document.body.clientHeight
         });
 
-        return subsectionTemplateFunction({
+        return sectionTemplateFunction({
             identifier,
-            subsection,
+            section,
             resources,
             page,
             pages
         });
     }
 
-    private gotoPage(event: any, subsection: any): void {
+    private gotoPage(event: any, section: any): void {
         const dataset = Object.keys(event.target.dataset).length ? event.target.dataset : event.target.parentElement.dataset;
         const pageNumber = Number(dataset.pageNumber);
         const pageSize = Number(dataset.pageSize);
-        this.renderSubsection(subsection, pageNumber, pageSize);
+        this.renderSection(section, pageNumber, pageSize);
     }
 
-    private setPageSize(event: any, subsection: any): void {
-        this.renderSubsection(subsection, 1, Number(event.target.value));
+    private setPageSize(event: any, section: any): void {
+        this.renderSection(section, 1, Number(event.target.value));
     }
 
     private getAdditionalContext(): any {
