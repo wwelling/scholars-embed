@@ -77,12 +77,12 @@ export class EmbedSection {
     private fetchLazyReferences(section: any, individual: any): Promise<void> {
         return new Promise((resolve, reject) => {
             const promises: Array<Promise<any>> = [];
-            section.lazyReferences.filter((lr: any) => individual[lr.field] !== undefined).forEach((lazyReference) => {
-                const ids = individual[lazyReference.field].map((resource) => resource.id);
-                const promise = discoveryService.getByIdIn(lazyReference.collection, ids);
+            section.lazyReferences.filter((lr: any) => individual[lr] !== undefined).forEach((lazyReference) => {
+                const ids = individual[lazyReference].map((resource) => resource.id);
+                const promise = discoveryService.getByIdIn('individual', ids);
                 promises.push(promise);
                 promise.then((resources: any[]) => {
-                    individual[lazyReference.field] = resources;
+                    individual[lazyReference] = resources;
                 });
             });
             Promise.all(promises).then(() => resolve());
