@@ -1,6 +1,6 @@
 {
   "name": "scholars-embed",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Embedded client for Scholars Discovery",
   "license": "MIT",
   "repository": {
@@ -24,19 +24,19 @@
     "cors": "2.8.5",
     "express": "4.17.1",
     "jquery": "3.4.1",
-    "popper.js": "1.15.0",
+    "popper.js": "1.16.0",
     "scholars-embed-utilities": "0.1.7"
   },
   "devDependencies": {
     "@types/compression": "1.0.1",
     "@types/express": "4.17.1",
-    "@types/node": "12.7.5",
+    "@types/node": "12.12.0",
     "copy-webpack-plugin": "5.0.4",
-    "ts-loader": "6.0.4",
-    "tslint": "5.19.0",
-    "typescript": "3.6.3",
+    "ts-loader": "6.2.1",
+    "tslint": "5.20.0",
+    "typescript": "3.6.4",
     "uglifyjs-webpack-plugin": "2.2.0",
-    "webpack": "4.39.3",
-    "webpack-cli": "3.3.8"
+    "webpack": "4.41.2",
+    "webpack-cli": "3.3.9"
   }
 }
