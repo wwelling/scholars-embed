@@ -104,14 +104,29 @@ export class EmbedRenderer {
 
         // sort
         resources = [].concat(resources);
-        for (const s of section.sort) {
-            const asc = s.direction.toUpperCase().trim() === 'ASC';
-            resources = resources.sort((a, b) => {
+        resources = resources.sort((a, b) => {
+            let result = 0;
+            for (const s of section.sort) {
+                const isAsc = s.direction.toUpperCase().trim() === 'ASC';
+                if (a[s.field] === undefined) {
+                    return isAsc ? -1 : 1;
+                }
+                if (b[s.field] === undefined) {
+                    return isAsc ? 1 : -1;
+                }
                 const av = s.date ? new Date(a[s.field]) : a[s.field];
                 const bv = s.date ? new Date(b[s.field]) : b[s.field];
-                return asc ? (av > bv) ? 1 : ((bv > av) ? -1 : 0) : (bv > av) ? 1 : ((av > bv) ? -1 : 0);
-            });
-        }
+                if (isAsc) {
+                    result = av > bv ? 1 : av < bv ? -1 : 0;
+                } else {
+                    result = av < bv ? 1 : av > bv ? -1 : 0;
+                }
+                if (result !== 0) {
+                    break;
+                }
+            }
+            return result;
+        });
 
         // pagination
         const totalElements = resources.length;
