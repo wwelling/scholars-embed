@@ -1,6 +1,7 @@
 export const environment = {
     formalize: {
         otherUniversity: 'ExternalOrganization',
-        GreyLiterature: 'InstitutionalRepositoryDocument'
+        GreyLiterature: 'InstitutionalRepositoryDocument',
+        ERO_0000071: 'Software'
     }
 };
