@@ -53,20 +53,10 @@
     "@types/node" "*"
     "@types/range-parser" "*"
 
-"@types/express@*":
+"@types/express@*", "@types/express@4.17.4":
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.4.tgz#e78bf09f3f530889575f4da8a94cd45384520aac"
   integrity sha512-DO1L53rGqIDUEvOjJKmbMEQ5Z+BM2cIEPy/eV3En+s166Gz+FeuzRerxcab757u/U4v4XF4RYrZPmqKa+aY/2w==
-  dependencies:
-    "@types/body-parser" "*"
-    "@types/express-serve-static-core" "*"
-    "@types/qs" "*"
-    "@types/serve-static" "*"
-
-"@types/express@4.17.5":
-  version "4.17.5"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.5.tgz#f7457497c72ca7bf98b13bb6f1ef2898ed550bd9"
-  integrity sha512-u4Si7vYAjy5/UyRFa8EoqLHh6r82xOZPbWRQHlSf6alob0rlyza7EkU0RbR8kOZqgWp6R5+aRcHMYYby7w12Bg==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "*"
@@ -1838,10 +1828,10 @@ isobject@^3.0.0, isobject@^3.0.1:
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
 
-jquery@3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
-  integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
+jquery@3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.5.0.tgz#9980b97d9e4194611c36530e7dc46a58d7340fc9"
+  integrity sha512-Xb7SVYMvygPxbFMpTFQiHh1J7HClEaThguL15N/Gg37Lri/qKyhRGZYzHRyLH8Stq3Aow0LsHO2O2ci86fCrNQ==
 
 js-tokens@^4.0.0:
   version "4.0.0"
@@ -2740,10 +2730,10 @@ schema-utils@^1.0.0:
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
 
-scholars-embed-utilities@0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/scholars-embed-utilities/-/scholars-embed-utilities-0.2.0.tgz#1a49480c163c85de91101e7f23bb64d073439532"
-  integrity sha512-MyqWKtfss47Wdi5/RU63Ea7buyBG3iChB9LCoG/uQbZL8s92NMQRJ3Z349IqikTYyWU1EqCTw8me1cbGz6HjQQ==
+scholars-embed-utilities@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/scholars-embed-utilities/-/scholars-embed-utilities-0.2.1.tgz#e08e2144c9185595f47be6715c7dfc5623389b7d"
+  integrity sha512-5R59CjAXtmEy6crp+vniQ1SVgpO/VlOIVs74YzEDLJn89Rfnbynnqo4t6MNqRY48c6Zwu9U6M1HiV9b9R/YUaA==
   dependencies:
     handlebars "4.7.6"
     handlebars-loader "1.7.1"
