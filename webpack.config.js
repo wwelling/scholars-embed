@@ -14,7 +14,6 @@ module.exports = {
     ]
   },
   mode: 'production',
-  devtool: 'source-map',
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, './dist')
@@ -32,7 +31,7 @@ module.exports = {
             comments: false
           }
         },
-        sourceMap: true,
+        sourceMap: false,
         include: /\.min\.js$/,
       })
     ]
@@ -50,16 +49,14 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js']
   },
   plugins: [
-    new CopyPlugin([
-      {
-        from: './node_modules/bootstrap/dist/css/bootstrap.min.css',
-        to: './bootstrap.min.css'
-      },
-      {
-        from: './node_modules/bootstrap/dist/css/bootstrap.min.css.map',
-        to: './bootstrap.min.css.map'
-      }
-    ]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './node_modules/bootstrap/dist/css/bootstrap.min.css',
+          to: './bootstrap.min.css'
+        }
+      ]
+    })
   ]
 };
 
