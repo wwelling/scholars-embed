@@ -1,6 +1,6 @@
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -20,10 +20,9 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        cache: true,
+      new TerserPlugin({
         parallel: true,
-        uglifyOptions: {
+        terserOptions: {
           compress: false,
           ecma: 6,
           mangle: true,
@@ -31,7 +30,6 @@ module.exports = {
             comments: false
           }
         },
-        sourceMap: false,
         include: /\.min\.js$/,
       })
     ]
