@@ -3,14 +3,17 @@
   "version": "0.2.2",
   "description": "Embedded client for Scholars Discovery",
   "license": "MIT",
+  "private": false,
+  "contributors": [
+    "William Welling <wwelling@library.tamu.edu>"
+  ],
+  "engines": {
+    "node": "^14.20.0 || ^16.13.0 || >=18.10.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/vivo-community/scholars-embed.git"
   },
-  "contributors": [
-    "William Welling <wwelling@library.tamu.edu>"
-  ],
-  "private": false,
   "scripts": {
     "start": "node ./dist/server.js",
     "build": "webpack && yarn compile:server",
