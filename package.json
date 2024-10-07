@@ -1,6 +1,6 @@
 {
   "name": "scholars-embed",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Embedded client for Scholars Discovery",
   "license": "MIT",
   "private": false,
@@ -28,7 +28,7 @@
     "express": "4.18.2",
     "jquery": "3.6.3",
     "popper.js": "1.16.1",
-    "scholars-embed-utilities": "0.3.4"
+    "scholars-embed-utilities": "0.3.6"
   },
   "devDependencies": {
     "@types/compression": "1.7.2",
